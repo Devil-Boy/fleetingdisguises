@@ -17,6 +17,7 @@ import com.nijikokun.bukkit.Permissions.Permissions;
 public class FleetingDisguises extends JavaPlugin {
 	// File Locations
     static String pluginMainDir = "./plugins/FleetingDisguises";
+    static String pluginConfigLocation = pluginMainDir + "/FleetingDisguises.cfg";
     
     // Permissions support
     static PermissionHandler Permissions;

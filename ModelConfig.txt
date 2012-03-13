@@ -1,0 +1,13 @@
+#
+# FleetingDisguises Configuration
+#
+
+# Disguise Time Length
+#	Here's the time (in seconds) that a disguise
+#	lasts.
+disguiseTime=60
+
+# Disguise Cooldown
+#	The time (in seconds), after being undisguised,
+#	that a player must wait before disguising again.
+disguiseCool=60
