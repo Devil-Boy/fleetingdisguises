@@ -8,6 +8,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import pgDev.bukkit.DisguiseCraft.DisguiseCraft;
+import pgDev.bukkit.DisguiseCraft.api.DisguiseCraftAPI;
+
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 
@@ -18,6 +21,9 @@ public class FleetingDisguises extends JavaPlugin {
     // Permissions support
     static PermissionHandler Permissions;
     
+    // DisguiseCraft API
+    DisguiseCraftAPI dcAPI;
+    
     // Listeners
     FDMainListener mainListener = new FDMainListener(this);
 	
@@ -27,7 +33,7 @@ public class FleetingDisguises extends JavaPlugin {
 		if(!pluginDir.exists()) {
 			boolean dirCreation = pluginDir.mkdirs();
 			if (dirCreation) {
-				System.out.println("New DisguiseCraft directory created!");
+				System.out.println("New FleetingDisguises directory created!");
 			}
 		}
 		
@@ -35,8 +41,9 @@ public class FleetingDisguises extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(mainListener, this);
 		
-		// Get permissions in the game!
+		// Integrations!
         setupPermissions();
+        setupDisguiseCraft();
         
         // Output to console
         PluginDescriptionFile pdfFile = this.getDescription();
@@ -65,5 +72,10 @@ public class FleetingDisguises extends JavaPlugin {
         } else {
             return player.hasPermission(node);
         }
+    }
+    
+    // DisguiseCraft API Setup
+    private void setupDisguiseCraft() {
+    	dcAPI = DisguiseCraft.getAPI();
     }
 }
