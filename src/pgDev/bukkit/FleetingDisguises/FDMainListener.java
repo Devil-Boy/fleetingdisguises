@@ -27,9 +27,9 @@ public class FDMainListener implements Listener {
 				player.sendMessage(ChatColor.RED + "You are still disguised.");
 			} else if (!plugin.hasPermissions(player, "fleetingdisguises.cooldown.exempt") &&
 				plugin.coolDB.containsKey(player.getName()) &&
-				(new Date()).getTime() > plugin.coolDB.get(player.getName()) + plugin.pluginSettings.disguiseCool * 1000) {
+				(new Date()).getTime() <= plugin.coolDB.get(player.getName()) + plugin.pluginSettings.disguiseCool * 1000) {
 				event.setCancelled(true);
-				player.sendMessage(ChatColor.RED + "You must wait before disguising again.");
+				player.sendMessage(ChatColor.RED + "You must wait " + ((plugin.coolDB.get(player.getName()) + plugin.pluginSettings.disguiseCool * 1000 - (new Date()).getTime()) / 1000) + " seconds before disguising again.");
 			} else {
 				if (!plugin.hasPermissions(player, "fleetingdisguises.timelimit.exempt")) {
 					Timer t = new Timer();
