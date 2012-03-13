@@ -2,7 +2,7 @@
 # FleetingDisguises Configuration
 #
 
-# Disguise Time Length
+# Disguise Time Limit Length
 #	Here's the time (in seconds) that a disguise
 #	lasts.
 disguiseTime=60
@@ -11,3 +11,8 @@ disguiseTime=60
 #	The time (in seconds), after being undisguised,
 #	that a player must wait before disguising again.
 disguiseCool=60
+
+# Undisguise Notification
+#	This is the message shown to the player when
+#	he is undisguised after reaching the time limit.
+undisNotif=Time's up! You've been undisguised.

@@ -2,7 +2,10 @@ package pgDev.bukkit.FleetingDisguises;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -32,6 +35,10 @@ public class FleetingDisguises extends JavaPlugin {
     
     // Plugin Configuration
     FDConfig pluginSettings;
+    
+    // Databases
+    ConcurrentHashMap<String, Timer> undisguiseTimers = new ConcurrentHashMap<String, Timer>();
+    HashMap<String, Long> coolDB = new HashMap<String, Long>();
 	
 	public void onEnable() {
 		// Check for the plugin directory (create if it does not exist)

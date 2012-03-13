@@ -5,3 +5,17 @@ author: PG Dev Team
 authors: [Devil Boy]
 description: You can't disguise forever!
 depend: [DisguiseCraft]
+
+permissions:
+    fleetingdisguises.*:
+        default: op
+        description: Has full FleetingDisguises privileges
+        children:
+            fleetingdisguises.timelimit.exempt: true
+            fleetingdisguises.cooldown.exempt: true
+    fleetingdisguises.timelimit.exempt:
+        default: op
+        description: Has no disguise time limit.
+    fleetingdisguises.cooldown.exempt:
+        default: op
+        description: Has no disguise cooldown.

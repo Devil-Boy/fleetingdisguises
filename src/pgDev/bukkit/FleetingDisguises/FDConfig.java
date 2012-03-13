@@ -18,6 +18,7 @@ public class FDConfig {
 	// List of Config Options
 	int disguiseTime;
 	int disguiseCool;
+	String undisNotif;
 	
 	public FDConfig(Properties p, final FleetingDisguises plugin) {
 		properties = p;
@@ -26,6 +27,7 @@ public class FDConfig {
 		// Grab values here
 		disguiseTime = getInt("disguiseTime", 60);
 		disguiseCool = getInt("disguiseCool", 60);
+		undisNotif = getString("undisNotif", "Time's up! You've been undisguised.");
 	}
 	
 	// Value obtaining functions down below
@@ -145,7 +147,7 @@ public class FDConfig {
     		out.write("# FleetingDisguises Configuration\r\n");
     		out.write("#\r\n");
     		out.write("\r\n");
-    		out.write("# Disguise Time Length\r\n");
+    		out.write("# Disguise Time Limit Length\r\n");
     		out.write("#	Here's the time (in seconds) that a disguise\r\n");
     		out.write("#	lasts.\r\n");
     		out.write("disguiseTime=" + disguiseTime + "\r\n");
@@ -154,6 +156,11 @@ public class FDConfig {
     		out.write("#	The time (in seconds), after being undisguised,\r\n");
     		out.write("#	that a player must wait before disguising again.\r\n");
     		out.write("disguiseCool=" + disguiseCool + "\r\n");
+    		out.write("\r\n");
+    		out.write("# Undisguise Notification\r\n");
+    		out.write("#	This is the message shown to the player when\r\n");
+    		out.write("#	he is undisguised after reaching the time limit.\r\n");
+    		out.write("undisNotif=" + undisNotif + "\r\n");
     		out.close();
     	} catch (Exception e) {
     		System.out.println(e);
