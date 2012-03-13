@@ -53,7 +53,7 @@ public class FDMainListener implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.LOW)
 	public void onQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		if (plugin.undisguiseTimers.containsKey(player.getName())) {
