@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import pgDev.bukkit.DisguiseCraft.Disguise.MobType;
 import pgDev.bukkit.DisguiseCraft.api.PlayerDisguiseEvent;
 import pgDev.bukkit.DisguiseCraft.api.PlayerUndisguiseEvent;
 
