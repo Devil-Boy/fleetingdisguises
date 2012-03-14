@@ -34,11 +34,10 @@ public class FDMainListener implements Listener {
 			} else {
 				if (!plugin.hasPermissions(player, "fleetingdisguises.timelimit.exempt")) {
 					Timer t = new Timer();
-					MobType mob = event.getDisguise().mob;
-					if (mob == null) {
+					if (event.getDisguise().isPlayer()) {
 						t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get("player") * 1000);
 					} else {
-						t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get(mob.name().toLowerCase()) * 1000);
+						t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get(event.getDisguise().mob.name().toLowerCase()) * 1000);
 					}
 					plugin.undisguiseTimers.put(player.getName(), t);
 				}
