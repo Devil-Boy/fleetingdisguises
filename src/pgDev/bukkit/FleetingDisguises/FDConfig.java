@@ -5,10 +5,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Properties;
+
+import pgDev.bukkit.DisguiseCraft.Disguise.MobType;
 
 public class FDConfig {
 	private Properties properties;
@@ -16,7 +19,7 @@ public class FDConfig {
 	public boolean upToDate = true;
 	
 	// List of Config Options
-	int disguiseTime;
+	HashMap<String, Integer> disguiseLengths = new HashMap<String, Integer>();
 	int disguiseCool;
 	String undisNotif;
 	
@@ -25,7 +28,11 @@ public class FDConfig {
 		this.plugin = plugin;
 		
 		// Grab values here
-		disguiseTime = getInt("disguiseTime", 60);
+		disguiseLengths.put("player", getInt("player", 60));
+		for (MobType disguise : MobType.values()) {
+			String mob = disguise.name().toLowerCase();
+			disguiseLengths.put(mob, getInt(mob, 60));
+		}
 		disguiseCool = getInt("disguiseCool", 60);
 		undisNotif = getString("undisNotif", "Time's up! You've been undisguised.");
 	}
@@ -148,9 +155,13 @@ public class FDConfig {
     		out.write("#\r\n");
     		out.write("\r\n");
     		out.write("# Disguise Time Limit Length\r\n");
-    		out.write("#	Here's the time (in seconds) that a disguise\r\n");
+    		out.write("#	Here's the time (in seconds) that each disguise\r\n");
     		out.write("#	lasts.\r\n");
-    		out.write("disguiseTime=" + disguiseTime + "\r\n");
+    		out.write("player=" + disguiseLengths.get("player") + "\r\n");
+    		for (MobType disguise : MobType.values()) {
+    			String mob = disguise.name().toLowerCase();
+    			out.write(mob + "=" + disguiseLengths.get(mob) + "\r\n");
+    		}
     		out.write("\r\n");
     		out.write("# Disguise Cooldown\r\n");
     		out.write("#	The time (in seconds), after being undisguised,\r\n");

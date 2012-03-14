@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import pgDev.bukkit.DisguiseCraft.Disguise.MobType;
 import pgDev.bukkit.DisguiseCraft.api.PlayerDisguiseEvent;
 import pgDev.bukkit.DisguiseCraft.api.PlayerUndisguiseEvent;
 
@@ -33,7 +34,12 @@ public class FDMainListener implements Listener {
 			} else {
 				if (!plugin.hasPermissions(player, "fleetingdisguises.timelimit.exempt")) {
 					Timer t = new Timer();
-					t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseTime * 1000);
+					MobType mob = event.getDisguise().mob;
+					if (mob == null) {
+						t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get("player") * 1000);
+					} else {
+						t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get(mob.name().toLowerCase()) * 1000);
+					}
 					plugin.undisguiseTimers.put(player.getName(), t);
 				}
 			}

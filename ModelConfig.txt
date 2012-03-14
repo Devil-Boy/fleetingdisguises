@@ -3,9 +3,34 @@
 #
 
 # Disguise Time Limit Length
-#	Here's the time (in seconds) that a disguise
+#	Here's the time (in seconds) that each disguise
 #	lasts.
-disguiseTime=60
+player=60
+blaze=60
+cavespider=60
+chicken=60
+cow=60
+creeper=60
+enderdragon=60
+enderman=60
+ghast=60
+giant=60
+irongolem=60
+magmacube=60
+mushroomcow=60
+ocelot=60
+pig=60
+pigzombie=60
+sheep=60
+silverfish=60
+skeleton=60
+slime=60
+snowman=60
+spider=60
+squid=60
+villager=60
+wolf=60
+zombie=60
 
 # Disguise Cooldown
 #	The time (in seconds), after being undisguised,
