@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
-import pgDev.bukkit.DisguiseCraft.Disguise.MobType;
+import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
 
 public class FDConfig {
 	private Properties properties;
@@ -28,8 +28,7 @@ public class FDConfig {
 		this.plugin = plugin;
 		
 		// Grab values here
-		disguiseLengths.put("player", getInt("player", 60));
-		for (MobType disguise : MobType.values()) {
+		for (DisguiseType disguise : DisguiseType.values()) {
 			String mob = disguise.name().toLowerCase();
 			disguiseLengths.put(mob, getInt(mob, 60));
 		}
@@ -157,8 +156,7 @@ public class FDConfig {
     		out.write("# Disguise Time Limit Length\r\n");
     		out.write("#	Here's the time (in seconds) that each disguise\r\n");
     		out.write("#	lasts.\r\n");
-    		out.write("player=" + disguiseLengths.get("player") + "\r\n");
-    		for (MobType disguise : MobType.values()) {
+    		for (DisguiseType disguise : DisguiseType.values()) {
     			String mob = disguise.name().toLowerCase();
     			out.write(mob + "=" + disguiseLengths.get(mob) + "\r\n");
     		}

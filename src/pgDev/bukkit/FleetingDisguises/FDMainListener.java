@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import pgDev.bukkit.DisguiseCraft.api.PlayerDisguiseEvent;
 import pgDev.bukkit.DisguiseCraft.api.PlayerUndisguiseEvent;
+import pgDev.bukkit.DisguiseCraft.disguise.DisguiseType;
 
 public class FDMainListener implements Listener {
 	final FleetingDisguises plugin;
@@ -21,24 +22,24 @@ public class FDMainListener implements Listener {
 	@EventHandler
 	public void onDisguise(PlayerDisguiseEvent event) {
 		if (!event.isCancelled()) {
+			DisguiseType type = event.getDisguise().type;
 			Player player = event.getPlayer();
-			Byte endermanHold = event.getDisguise().getHolding();
-			if (endermanHold == null) {
+			if (type != DisguiseType.Enderman || event.getDisguise().getBlockID() == null) {
 				if (plugin.undisguiseTimers.containsKey(player.getName())) {
 					event.setCancelled(true);
 					player.sendMessage(ChatColor.RED + "You are still disguised.");
-				} else if (!plugin.hasPermissions(player, "fleetingdisguises.cooldown.exempt") &&
+				} else if (!player.hasPermission("fleetingdisguises.cooldown.exempt") &&
 					plugin.coolDB.containsKey(player.getName()) &&
 					(new Date()).getTime() <= plugin.coolDB.get(player.getName()) + plugin.pluginSettings.disguiseCool * 1000) {
 					event.setCancelled(true);
 					player.sendMessage(ChatColor.RED + "You must wait " + ((plugin.coolDB.get(player.getName()) + plugin.pluginSettings.disguiseCool * 1000 - (new Date()).getTime()) / 1000) + " seconds before disguising again.");
 				} else {
-					if (!plugin.hasPermissions(player, "fleetingdisguises.timelimit.exempt")) {
+					if (!player.hasPermission("fleetingdisguises.timelimit.exempt")) {
 						Timer t = new Timer();
-						if (event.getDisguise().isPlayer()) {
+						if (event.getDisguise().type == DisguiseType.Player) {
 							t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get("player") * 1000);
 						} else {
-							t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get(event.getDisguise().mob.name().toLowerCase()) * 1000);
+							t.schedule(new UndisguiseTimer(player, plugin), plugin.pluginSettings.disguiseLengths.get(event.getDisguise().type.name().toLowerCase()) * 1000);
 						}
 						plugin.undisguiseTimers.put(player.getName(), t);
 					}
